@@ -43,7 +43,7 @@ const LoginUser = async (req, res)=>{
     if (userData) {
         const hashPassword = userData.password;
         const validate = bcrypt.compareSync(password, hashPassword);
-        const token = jwt.sign({email: email}, process.env.SCRETKEY, {expiresIn: '15d'})
+        const token = jwt.sign({email: email}, process.env.SCRETKEY, {expiresIn: '30d'})
         
         if(validate){
             return res.send({
@@ -65,6 +65,10 @@ const LoginUser = async (req, res)=>{
     }
 
 }
+
+
+
+
 
 module.exports = {
     RegisterUser,

@@ -40,12 +40,43 @@ const deleteProduct = async (req, res) => {
     const result = await product.deleteMany();
     return res.send({ msg: "data has been deleted", result: result });
   };
+
   const searchproduct = async (req, res) => {
     const data = req.query;
     const result = new searchbar(product.find(), data).search();
     const products = await result.query;
     return res.send(products);
   };
+
+// const getProductsByFilter = async(req,res)=>{
+//     try{
+//       const title = req.params.title;
+//       const regex = new RegExp(title, 'i')
+//    const Product = await product.find({ title: regex });
+//       res.send(Product);
+//     } catch (error) {
+//       res.status(500).json({
+//         success: false,
+//         message: "Error while getting a category",
+//         error,
+//       });
+//     }
+//   }
+const getProductsByFilter = async(req,res)=>{
+    try{
+      const decriptions = req.params.decriptions;
+      const regex = new RegExp(decriptions, 'i')
+   const Product = await product.find({ decriptions: regex });
+      res.send(Product);
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Error while getting a category",
+        error,
+      });
+    }
+  }
+  
 
   module.exports = {
     addProducts,
@@ -55,4 +86,5 @@ const deleteProduct = async (req, res) => {
     fetchParticularbysubCat,
     deleteProduct,
     searchproduct,
+    getProductsByFilter
   }

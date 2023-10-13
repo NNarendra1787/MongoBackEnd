@@ -1,4 +1,4 @@
-const { addProducts, addProductsTodb, fetchData, fetchPerticularbyCat, fetchParticularbysubCat, deleteProduct, searchproduct } = require("../DatabaseController/Products");
+const { addProducts, addProductsTodb, fetchData, fetchPerticularbyCat, fetchParticularbysubCat, deleteProduct, searchproduct, getProductsByFilter } = require("../DatabaseController/Products");
 
 const productRoute = require("express").Router();
 
@@ -9,6 +9,8 @@ productRoute.get("/fetchdata", fetchData);
 productRoute.get("/fetchbycart/:cat", fetchPerticularbyCat)
 productRoute.get("/fetchbysubcat/:comp", fetchParticularbysubCat)
 productRoute.delete("/deleteall", deleteProduct);
-productRoute.get("/search", searchproduct)
+// productRoute.get("/search/:title", searchproduct)
+productRoute.get("/search/:decriptions", getProductsByFilter)
+
 
 module.exports = productRoute;
