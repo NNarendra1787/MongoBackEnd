@@ -10,7 +10,8 @@ productRoute.get("/fetchbycart/:cat", fetchPerticularbyCat)
 productRoute.get("/fetchbysubcat/:comp", fetchParticularbysubCat)
 productRoute.delete("/deleteall", deleteProduct);
 // productRoute.get("/search/:title", searchproduct)
-productRoute.get("/search/:decriptions", getProductsByFilter)
+productRoute.get("/search/:title", getProductsByFilter)
+// productRoute.get("/search/:decriptions", getProductsByFilter)
 
 
 module.exports = productRoute;

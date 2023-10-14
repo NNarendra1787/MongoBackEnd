@@ -48,25 +48,11 @@ const deleteProduct = async (req, res) => {
     return res.send(products);
   };
 
-// const getProductsByFilter = async(req,res)=>{
-//     try{
-//       const title = req.params.title;
-//       const regex = new RegExp(title, 'i')
-//    const Product = await product.find({ title: regex });
-//       res.send(Product);
-//     } catch (error) {
-//       res.status(500).json({
-//         success: false,
-//         message: "Error while getting a category",
-//         error,
-//       });
-//     }
-//   }
 const getProductsByFilter = async(req,res)=>{
     try{
-      const decriptions = req.params.decriptions;
-      const regex = new RegExp(decriptions, 'i')
-   const Product = await product.find({ decriptions: regex });
+      const title = req.params.title;
+      const regex = new RegExp(title, 'i')
+   const Product = await product.find({ title: regex });
       res.send(Product);
     } catch (error) {
       res.status(500).json({
@@ -76,6 +62,20 @@ const getProductsByFilter = async(req,res)=>{
       });
     }
   }
+// const getProductsByFilter = async(req,res)=>{
+//     try{
+//       const decriptions = req.params.decriptions;
+//       const regex = new RegExp(decriptions, 'i')
+//    const Product = await product.find({ decriptions: regex });
+//       res.send(Product);
+//     } catch (error) {
+//       res.status(500).json({
+//         success: false,
+//         message: "Error while getting a category",
+//         error,
+//       });
+//     }
+//   }
   
 
   module.exports = {
