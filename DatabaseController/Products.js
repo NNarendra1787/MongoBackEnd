@@ -1,6 +1,8 @@
 const product = require("../ModuleSchema/ProductsSchema");
 const data = require("./data");
 const searchbar = require("./searchbar");
+const { createOrder } = require("../PaymentGet");
+const { response } = require("express");
 
 const addProducts = async (req, res) => {
   const result = await product.insertMany(data);
@@ -109,6 +111,30 @@ const getProductsByFilter = async (req, res) => {
 //     }
 //   }
 
+async function newOrder(req, res){
+  try {
+    const { cart } = req.body;
+    const { response, httpStatusCode } = await createOrder(cart);
+    res.status(httpStatusCode).json(response);
+  } catch (error) {
+    console.error("Failed to create order:", error);
+    res.status(500).json({ error: "Failed to create order." });
+  }
+}
+
+const orderCapture = async (req, res) => {
+  try {
+      const { orderID } = req.params;
+
+      // console.log("OrderID:------------------------------", orderID);
+      const { response, httpStatusCode } = await captureOrder(orderID);
+      res.status(httpStatusCode).json(response);
+  } catch (error) {
+      console.error("Failed to create order:", error);
+      res.status(500).json({ error: "Failed to capture order." });
+  }
+}
+
 module.exports = {
   addNewProduct,
   addProducts,
@@ -119,4 +145,6 @@ module.exports = {
   deleteProduct,
   searchproduct,
   getProductsByFilter,
+  newOrder,
+  orderCapture,
 };
