@@ -1,7 +1,7 @@
 const user = require("../ModuleSchema/userSchema")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const saltRound = process.env.SALTROUND;
+const saltRound = 10;
 
 const RegisterUser = async (req, res)=>{
     const RgData = req.body;
